@@ -1,0 +1,56 @@
+- carpool:
+    description: Group of Drivers & Riders
+    title:
+    drivers:
+    riders:
+- clown:
+    description: a user of the app (everybody's a clown)
+    items:
+      name:
+        description: the name of the rider
+      birthdate:
+        description: the age of the rider
+      weight:
+        description: (optional) only necessary if the rider is under 12 (determines if rider can sit in front seat)
+      additional-requirements:
+        description: (optional) if a rider has special needs like wheelchair access or if they get car sick
+      taxonomy: reference(clown-type)
+- taxonomy(clown-type):
+    items:
+      driver:
+        description: The user responsible for transporting the riders
+        items:
+          car: reference(car)
+      rider:
+        description: The user only responsible for showing up to a trip
+- car:
+    description: the vehicle associated with a driver
+    items:
+      make:
+      model:
+      year:
+      license-plate:
+      seats: reference(seat)
+- seat:
+- trip:
+    description: The actual carpool event
+    repeatable: true
+    map: reference(map)
+    carpool: reference(carpool)
+    title:
+    rider(s):
+    schedule:
+      items:
+        date(s):
+        start-time:
+        end-time:
+- map:
+    description: a map showing the trip route
+    route: reference(route)
+    driver: reference(driver)
+- route:
+    items:
+      start:
+        description: starting location of the trip
+      finish:
+        description: destination location of the trip
